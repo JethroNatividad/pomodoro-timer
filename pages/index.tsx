@@ -25,7 +25,6 @@ const Home: NextPage = () => {
         <PomodoroTimer appSettings={appSettings} />
       </main>
 
-
     </div>
   )
 }
