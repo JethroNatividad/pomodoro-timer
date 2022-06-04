@@ -1,25 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 
 type Props = {
-}
-
-type AppSettings = {
-    timers: {
-        workTime: number
-        breakTime: number
-        longBreakTime: number
-    }
-}
-
-enum STATUS {
-    WORK = 'workTime',
-    BREAK = 'breakTime',
-    LONG_BREAK = 'longBreakTime'
-}
-
-enum TIMER_STATUS {
-    PAUSED = 'PAUSED',
-    RUNNING = 'RUNNING'
 }
 
 const Timer = (props: Props) => {
