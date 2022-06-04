@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
-import Timer from '../components/Timer'
+import PomodoroTimer from '../components/PomodoroTimer'
 import { AppSettings } from '../types'
 
 const Home: NextPage = () => {
@@ -22,7 +22,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Timer appSettings={appSettings} />
+        <PomodoroTimer appSettings={appSettings} />
       </main>
 
 

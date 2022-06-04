@@ -5,7 +5,7 @@ type Props = {
     appSettings: AppSettings
 }
 
-const Timer = ({ appSettings }: Props) => {
+const PomodoroTimer = ({ appSettings }: Props) => {
 
     const [workDone, setWorkDone] = useState(3)
     const [status, setStatus] = useState<STATUS>(STATUS.WORK)
@@ -77,4 +77,4 @@ const Timer = ({ appSettings }: Props) => {
     )
 }
 
-export default Timer
+export default PomodoroTimer
