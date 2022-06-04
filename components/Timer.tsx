@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 type Props = {
-    time: string
+    seconds: number
 }
 
 const Timer = (props: Props) => {
     const Ref = useRef<NodeJS.Timer | null>(null);
     const [timer, setTimer] = useState<string>('00:00:00');
+    const [currentTime, setCurrentTime] = useState<number>(0);
 
     const getTimeRemaining = (e: string) => {
         const total = Date.parse(e) - Date.parse(new Date().toString());
@@ -56,7 +57,7 @@ const Timer = (props: Props) => {
 
         // This is where you need to adjust if 
         // you entend to add more time
-        deadline.setSeconds(deadline.getSeconds() + 10);
+        deadline.setSeconds(deadline.getSeconds() + props.seconds);
         return deadline;
     }
 
