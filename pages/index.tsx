@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className='bg-light-green w-full h-screen'>
         <Header workDone={workDone} />
         <PomodoroTimer appSettings={appSettings} setWorkDone={setWorkDone} workDone={workDone} />
       </main>
