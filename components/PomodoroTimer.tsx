@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import getFormattedTime from '../lib/timer'
 import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 
 type Props = {
@@ -78,11 +79,9 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
 
     return (
         <div className='flex flex-col items-center justify-center'>
-            <h1 className='text-lg font-semibold text-white'>{getStatusText(status)}</h1>
-            <h1>{secondsRemaining}</h1>
-            <button onClick={handleStart}>Start</button>
-            <button onClick={handlePause}>Pause</button>
-            <button onClick={handleReset}>Reset</button>
+            <h1 className='text-xl font-semibold text-white'>{getStatusText(status)}</h1>
+            <h1 className='text-3xl font-semibold text-white'>{getFormattedTime(secondsRemaining)}</h1>
+
         </div>
     )
 }
