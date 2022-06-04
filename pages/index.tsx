@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       longBreakTime: 15
     }
   })
-  const [workDone, setWorkDone] = useState<number>(3)
+  const [workDone, setWorkDone] = useState<number>(0)
 
 
   return (
