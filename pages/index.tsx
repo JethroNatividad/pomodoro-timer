@@ -1,8 +1,18 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Pomodoro from '../components/Pomodoro'
+import { useState } from 'react'
+import Timer from '../components/Timer'
+import { AppSettings } from '../types'
 
 const Home: NextPage = () => {
+  const [appSettings, setAppSettings] = useState<AppSettings>({
+    timers: {
+      workTime: 25,
+      breakTime: 5,
+      longBreakTime: 15
+    }
+  })
+
   return (
     <div>
       <Head>
@@ -12,7 +22,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Pomodoro />
+        <Timer appSettings={appSettings} />
       </main>
 
 

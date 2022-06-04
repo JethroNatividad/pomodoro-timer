@@ -2,16 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 
 type Props = {
+    appSettings: AppSettings
 }
 
-const Timer = (props: Props) => {
-    const [appSettings, setAppSettings] = useState<AppSettings>({
-        timers: {
-            workTime: 25,
-            breakTime: 5,
-            longBreakTime: 15
-        }
-    })
+const Timer = ({ appSettings }: Props) => {
+
     const [workDone, setWorkDone] = useState(3)
     const [status, setStatus] = useState<STATUS>(STATUS.WORK)
     const [timerStatus, setTimerStatus] = useState<TIMER_STATUS>(TIMER_STATUS.PAUSED)
