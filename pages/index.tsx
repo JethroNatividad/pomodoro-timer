@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
+import Header from '../components/Header'
 import PomodoroTimer from '../components/PomodoroTimer'
 import { AppSettings } from '../types'
 
@@ -24,6 +25,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
+        <Header workDone={workDone} />
         <PomodoroTimer appSettings={appSettings} setWorkDone={setWorkDone} workDone={workDone} />
       </main>
 
