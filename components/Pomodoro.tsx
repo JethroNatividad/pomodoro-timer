@@ -1,11 +1,11 @@
-import Timer2 from "./Timer2"
+import Timer from "./Timer"
 
 type Props = {}
 
 const Pomodoro = (props: Props) => {
     return (
         <div>
-            <Timer2 />
+            <Timer />
         </div>
     )
 }

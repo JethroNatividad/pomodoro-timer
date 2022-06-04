@@ -1,78 +1,101 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 type Props = {
-    seconds: number
+}
+
+type AppSettings = {
+    timers: {
+        workTime: number
+        breakTime: number
+        longBreakTime: number
+    }
+}
+
+enum STATUS {
+    WORK = 'workTime',
+    BREAK = 'breakTime',
+    LONG_BREAK = 'longBreakTime'
+}
+
+enum TIMER_STATUS {
+    PAUSED = 'PAUSED',
+    RUNNING = 'RUNNING'
 }
 
 const Timer = (props: Props) => {
-    const Ref = useRef<NodeJS.Timer | null>(null);
-    const [timer, setTimer] = useState<string>('00:00:00');
-    const [currentTime, setCurrentTime] = useState<number>(0);
-
-    const getTimeRemaining = (e: string) => {
-        const total = Date.parse(e) - Date.parse(new Date().toString());
-        const seconds = Math.floor((total / 1000) % 60);
-        const minutes = Math.floor((total / 1000 / 60) % 60);
-        const hours = Math.floor((total / 1000 / 60 / 60) % 24);
-        return {
-            total, hours, minutes, seconds
-        };
-    }
-
-    const startTimer = (e: string) => {
-        let { total, hours, minutes, seconds }
-            = getTimeRemaining(e);
-        if (total >= 0) {
-
-            // update the timer
-            // check if less than 10 then we need to 
-            // add '0' at the begining of the variable
-            setTimer(
-                (hours > 9 ? hours : '0' + hours) + ':' +
-                (minutes > 9 ? minutes : '0' + minutes) + ':'
-                + (seconds > 9 ? seconds : '0' + seconds)
-            )
+    const [appSettings, setAppSettings] = useState<AppSettings>({
+        timers: {
+            workTime: 25,
+            breakTime: 5,
+            longBreakTime: 15
         }
-    }
-
-    const clearTimer = (e: string) => {
-
-        // If you adjust it you should also need to
-        // adjust the Endtime formula we are about
-        // to code next    
-        setTimer('00:00:10');
-
-        // If you try to remove this line the 
-        // updating of timer Variable will be
-        // after 1000ms or 1sec
-        if (Ref.current) clearInterval(Ref.current);
-        const id = setInterval(() => {
-            startTimer(e);
-        }, 1000)
-        Ref.current = id;
-    }
-
-    const getDeadTime = () => {
-        let deadline = new Date();
-
-        // This is where you need to adjust if 
-        // you entend to add more time
-        deadline.setSeconds(deadline.getSeconds() + props.seconds);
-        return deadline;
-    }
+    })
+    const [workDone, setWorkDone] = useState(3)
+    const [status, setStatus] = useState<STATUS>(STATUS.WORK)
+    const [timerStatus, setTimerStatus] = useState<TIMER_STATUS>(TIMER_STATUS.PAUSED)
+    const [secondsRemaining, setSecondsRemaining] = useState<number>(appSettings.timers.workTime * 60)
 
     useEffect(() => {
-        clearTimer(getDeadTime().toString());
-    }, []);
+        if (timerStatus === TIMER_STATUS.RUNNING) {
+            const interval = setInterval(() => {
+                setSecondsRemaining(secondsRemaining - 1)
 
-    const onClickReset = () => {
-        clearTimer(getDeadTime().toString());
+                if (secondsRemaining === 0) {
+                    if (status === STATUS.WORK && workDone === 3) {
+                        setTimerStatus(TIMER_STATUS.PAUSED)
+                        setWorkDone(workDone + 1)
+                        setStatus(STATUS.LONG_BREAK)
+                        return setSecondsRemaining(appSettings.timers.longBreakTime * 60)
+                    }
+
+                    if (status === STATUS.WORK) {
+                        setTimerStatus(TIMER_STATUS.PAUSED)
+                        setWorkDone(workDone + 1)
+                        setStatus(STATUS.BREAK)
+                        return setSecondsRemaining(appSettings.timers.breakTime * 60)
+                    }
+
+                    if (status === STATUS.BREAK) {
+                        setTimerStatus(TIMER_STATUS.PAUSED)
+                        setStatus(STATUS.WORK)
+                        return setSecondsRemaining(appSettings.timers.workTime * 60)
+                    }
+
+                    if (status === STATUS.LONG_BREAK) {
+                        setTimerStatus(TIMER_STATUS.PAUSED)
+                        setStatus(STATUS.WORK)
+                        return setSecondsRemaining(appSettings.timers.workTime * 60)
+                    }
+
+                }
+            }, 1000)
+            return () => clearInterval(interval)
+        }
+
+
+    }, [timerStatus, secondsRemaining])
+
+    const handleStart = () => {
+        setTimerStatus(TIMER_STATUS.RUNNING)
+    }
+
+    const handlePause = () => {
+        setTimerStatus(TIMER_STATUS.PAUSED)
+    }
+
+    const handleReset = () => {
+        setTimerStatus(TIMER_STATUS.PAUSED)
+        setSecondsRemaining(appSettings.timers[status] * 60)
     }
 
     return (
         <div>
-            <h2>{timer}</h2>
-            <button onClick={onClickReset}>Reset</button>
+            <p>Work done: {workDone}</p>
+            <h1>{status}</h1>
+            <h1>{secondsRemaining}</h1>
+            <button onClick={handleStart}>Start</button>
+            <button onClick={handlePause}>Pause</button>
+            <button onClick={handleReset}>Reset</button>
         </div>
     )
 }
