@@ -12,6 +12,17 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     const [timerStatus, setTimerStatus] = useState<TIMER_STATUS>(TIMER_STATUS.PAUSED)
     const [secondsRemaining, setSecondsRemaining] = useState<number>(appSettings.timers.workTime * 60)
 
+    const getStatusText = (status: STATUS) => {
+        switch (status) {
+            case STATUS.WORK:
+                return 'Work'
+            case STATUS.BREAK:
+                return 'Short Break'
+            case STATUS.LONG_BREAK:
+                return 'Long Break'
+        }
+    }
+
     useEffect(() => {
         if (timerStatus === TIMER_STATUS.RUNNING) {
             const interval = setInterval(() => {
@@ -66,9 +77,8 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     }
 
     return (
-        <div>
-            <p>Work done: {workDone}</p>
-            <h1>{status}</h1>
+        <div className='flex flex-col items-center justify-center'>
+            <h1 className='text-lg font-semibold text-white'>{getStatusText(status)}</h1>
             <h1>{secondsRemaining}</h1>
             <button onClick={handleStart}>Start</button>
             <button onClick={handlePause}>Pause</button>
