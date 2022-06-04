@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { buildStyles, CircularProgressbar } from 'react-circular-progressbar'
 import getFormattedTime from '../lib/timer'
 import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 import Pie from './TimerCircle'
