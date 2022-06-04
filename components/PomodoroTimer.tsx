@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import getFormattedTime from '../lib/timer'
+import getFormattedTime, { calculatePercentage } from '../lib/timer'
 import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 import Pie from './TimerCircle'
 
@@ -81,7 +81,7 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     return (
         <div className='flex flex-col items-center justify-center'>
             <h1 className='text-xl font-semibold text-white'>{getStatusText(status)}</h1>
-            <Pie percentage={80} color="white" text='' />
+            <Pie percentage={calculatePercentage(secondsRemaining, appSettings.timers[status] * 60)} color="white" handleStart={handleStart} handlePause={handlePause} timerStatus={timerStatus} />
             <h1 className='text-3xl font-semibold text-white'>{getFormattedTime(secondsRemaining)}</h1>
 
         </div>
