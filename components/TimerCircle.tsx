@@ -50,12 +50,12 @@ const Pie = ({ percentage, handleStart, handlePause, timerStatus }: PieProps) =>
                 </g>
             </svg>
             <div className="absolute top-0 left-0 flex flex-col items-center justify-center h-full w-full">
-                <div className={`opacity-0 ${timerStatus === TIMER_STATUS.PAUSED && 'opacity-100'} w-20 h-20 transition-all duration-200 ease-in-out flex justify-center items-center`}>
+                <div className={`${timerStatus === TIMER_STATUS.PAUSED ? 'opacity-100' : 'opacity-0 '} w-20 h-20 transition-all duration-200 ease-in-out flex justify-center items-center`}>
                     {
                         percentage === 100 ? (
-                            <Image src={PlayIcon} objectFit="fill" className="invert" />
+                            <Image src={PlayIcon} objectFit="fill" className="invert" alt="Play" />
                         ) : (
-                            <Image src={PauseIcon} objectFit="fill" className="invert" />
+                            <Image src={PauseIcon} objectFit="fill" className="invert" alt="Pause" />
                         )
                     }
                 </div>
