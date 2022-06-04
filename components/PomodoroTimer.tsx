@@ -79,11 +79,10 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center'>
+        <div className='flex flex-col items-center justify-center mt-10 space-y-5'>
             <h1 className='text-xl font-semibold text-white'>{getStatusText(status)}</h1>
             <Pie percentage={calculatePercentage(secondsRemaining, appSettings.timers[status] * 60)} color="white" handleStart={handleStart} handlePause={handlePause} timerStatus={timerStatus} />
             <h1 className='text-3xl font-semibold text-white'>{getFormattedTime(secondsRemaining)}</h1>
-
         </div>
     )
 }
