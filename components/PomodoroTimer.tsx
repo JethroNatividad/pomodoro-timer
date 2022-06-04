@@ -86,8 +86,8 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
             <h1 className='text-xl font-semibold text-white'>{getStatusText(status)}</h1>
             <Pie percentage={calculatePercentage(secondsRemaining, appSettings.timers[status] * 60)} handleStart={handleStart} handlePause={handlePause} timerStatus={timerStatus} />
             <h1 className='text-3xl font-semibold text-white'>{getFormattedTime(secondsRemaining)}</h1>
-            <div onClick={handleReset} className={`${timerStatus === TIMER_STATUS.PAUSED ? 'opacity-100' : 'opacity-0'} scale-125 hover:scale-150 cursor-pointer transition-all ease-in-out duration-500 flex  items-center justify-center absolute bottom-10`}>
-                <Image src={ResetIcon} objectFit="fill" className="invert" />
+            <div onClick={handleReset} className={`${timerStatus === TIMER_STATUS.PAUSED && calculatePercentage(secondsRemaining, appSettings.timers[status] * 60) !== 100 ? 'opacity-100' : 'opacity-0'} hover:animate-spin cursor-pointer transition-all ease-in-out duration-500 flex  items-center justify-center absolute bottom-10`}>
+                <Image src={ResetIcon} objectFit="contain" className="invert" height={30} width={30} />
             </div>
         </div>
 
