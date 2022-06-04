@@ -2,6 +2,8 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import getFormattedTime, { calculatePercentage } from '../lib/timer'
 import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 import Pie from './TimerCircle'
+import ResetIcon from '../icons/reset.svg'
+import Image from 'next/image'
 
 type Props = {
     appSettings: AppSettings
@@ -79,11 +81,16 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center mt-10 space-y-5'>
+
+        <div className='flex flex-col mt-10 items-center justify-center space-y-5'>
             <h1 className='text-xl font-semibold text-white'>{getStatusText(status)}</h1>
             <Pie percentage={calculatePercentage(secondsRemaining, appSettings.timers[status] * 60)} handleStart={handleStart} handlePause={handlePause} timerStatus={timerStatus} />
             <h1 className='text-3xl font-semibold text-white'>{getFormattedTime(secondsRemaining)}</h1>
+            <div className='flex scale-150 items-center justify-center absolute bottom-10'>
+                <Image src={ResetIcon} objectFit="fill" className="invert  " />
+            </div>
         </div>
+
     )
 }
 
