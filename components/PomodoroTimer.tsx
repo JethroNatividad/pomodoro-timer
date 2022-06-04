@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 
 type Props = {
     appSettings: AppSettings
+    setWorkDone: Dispatch<SetStateAction<number>>
+    workDone: number
 }
 
-const PomodoroTimer = ({ appSettings }: Props) => {
-
-    const [workDone, setWorkDone] = useState(3)
+const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     const [status, setStatus] = useState<STATUS>(STATUS.WORK)
     const [timerStatus, setTimerStatus] = useState<TIMER_STATUS>(TIMER_STATUS.PAUSED)
     const [secondsRemaining, setSecondsRemaining] = useState<number>(appSettings.timers.workTime * 60)

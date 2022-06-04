@@ -12,6 +12,8 @@ const Home: NextPage = () => {
       longBreakTime: 15
     }
   })
+  const [workDone, setWorkDone] = useState<number>(3)
+
 
   return (
     <div>
@@ -22,7 +24,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <PomodoroTimer appSettings={appSettings} />
+        <PomodoroTimer appSettings={appSettings} setWorkDone={setWorkDone} workDone={workDone} />
       </main>
 
     </div>
