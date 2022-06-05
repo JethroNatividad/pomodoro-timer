@@ -54,7 +54,7 @@ export const previousStatus = ({ status, setTimerStatus, setWorkDone, setStatus,
     // to avoid negative values
     if (workDone < 1) return
 
-    if (status === STATUS.WORK && workDone === 4) {
+    if (status === STATUS.WORK && workDone % 4 === 0) {
         setTimerStatus(TIMER_STATUS.PAUSED)
         setStatus(STATUS.LONG_BREAK)
         return setSecondsRemaining(appSettings.timers.longBreakTime * 60)
