@@ -6,7 +6,7 @@ import TimeSetter from './TimeSetter'
 
 type Props = {
     appSettings: AppSettings
-    setAppSettings: Dispatch<SetStateAction<AppSettings>>
+    setAppSettings: (props: AppSettings) => void
     setSettingsOpen: Dispatch<SetStateAction<boolean>>
     settingsOpen: boolean
 }
