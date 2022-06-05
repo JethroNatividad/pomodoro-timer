@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useState } from 'react'
 import Header from '../components/Header'
 import PomodoroTimer from '../components/PomodoroTimer'
+import Settings from '../components/Settings'
 import { AppSettings } from '../types'
 
 const Home: NextPage = () => {
@@ -14,6 +15,7 @@ const Home: NextPage = () => {
     }
   })
   const [workDone, setWorkDone] = useState<number>(0)
+  const [settingsOpen, setSettingsOpen] = useState<boolean>(false)
 
 
   return (
@@ -27,7 +29,9 @@ const Home: NextPage = () => {
       <main className='bg-light-green w-full h-screen'>
         <Header workDone={workDone} />
         <PomodoroTimer appSettings={appSettings} setWorkDone={setWorkDone} workDone={workDone} />
+        <Settings appSettings={appSettings} setAppSettings={setAppSettings} setSettingsOpen={setSettingsOpen} settingsOpen={settingsOpen} />
       </main>
+
 
     </div>
   )
