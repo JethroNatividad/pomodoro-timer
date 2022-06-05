@@ -18,20 +18,6 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     const [timerStatus, setTimerStatus] = useState<TIMER_STATUS>(TIMER_STATUS.PAUSED)
     const [secondsRemaining, setSecondsRemaining] = useState<number>(appSettings.timers.workTime * 60)
 
-
-
-    useEffect(() => {
-        if (timerStatus === TIMER_STATUS.RUNNING) {
-            const interval = setInterval(() => {
-                setSecondsRemaining(secondsRemaining - 1)
-                if (secondsRemaining === 0) {
-                    nextStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
-                }
-            }, 1000)
-            return () => clearInterval(interval)
-        }
-    }, [timerStatus, secondsRemaining])
-
     const handleStart = () => {
         setTimerStatus(TIMER_STATUS.RUNNING)
     }
@@ -52,6 +38,24 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     const handlePrevious = () => {
         previousStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
     }
+
+    useEffect(() => {
+        handleReset()
+    }, [appSettings.timers])
+
+    useEffect(() => {
+        if (timerStatus === TIMER_STATUS.RUNNING) {
+            const interval = setInterval(() => {
+                setSecondsRemaining(secondsRemaining - 1)
+                if (secondsRemaining === 0) {
+                    nextStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
+                }
+            }, 1000)
+            return () => clearInterval(interval)
+        }
+    }, [timerStatus, secondsRemaining])
+
+
 
     return (
 
