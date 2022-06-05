@@ -23,7 +23,7 @@ type NextStatusProps = {
 }
 
 export const nextStatus = ({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone }: NextStatusProps) => {
-    if (status === STATUS.WORK && workDone === 3) {
+    if (status === STATUS.WORK && workDone % 4 === 3) {
         setTimerStatus(TIMER_STATUS.PAUSED)
         setWorkDone(workDone + 1)
         setStatus(STATUS.LONG_BREAK)
@@ -51,6 +51,9 @@ export const nextStatus = ({ status, setTimerStatus, setWorkDone, setStatus, set
 }
 
 export const previousStatus = ({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone }: NextStatusProps) => {
+    // to avoid negative values
+    if (workDone < 1) return
+
     if (status === STATUS.WORK && workDone === 4) {
         setTimerStatus(TIMER_STATUS.PAUSED)
         setStatus(STATUS.LONG_BREAK)
