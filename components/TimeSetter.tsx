@@ -1,5 +1,4 @@
 import React from 'react'
-import { STATUS } from '../types'
 
 type Props = {
     setTime: (time: number) => void
@@ -10,8 +9,12 @@ type Props = {
 const TimeSetter = ({ title, time, setTime }: Props) => {
     return (
         <div>
-            <h1 className='text-xl font-semibold text-white'>{title}</h1>
-            <div>yo</div>
+            <h1 className='text-xl text-white'>{title}</h1>
+            <div className='flex'>
+                <p>-</p>
+                <p className='text-3xl font-semibold text-white'>{time}</p>
+                <p>+</p>
+            </div>
         </div>
     )
 }
