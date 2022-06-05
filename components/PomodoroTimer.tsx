@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import getFormattedTime, { calculatePercentage, nextStatus, previousStatus } from '../lib/timer'
+import getFormattedTime, { calculatePercentage, getStatusText, nextStatus, previousStatus } from '../lib/timer'
 import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 import Pie from './TimerCircle'
 import ResetIcon from '../icons/reset.svg'
@@ -16,30 +16,18 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     const [timerStatus, setTimerStatus] = useState<TIMER_STATUS>(TIMER_STATUS.PAUSED)
     const [secondsRemaining, setSecondsRemaining] = useState<number>(appSettings.timers.workTime * 60)
 
-    const getStatusText = (status: STATUS) => {
-        switch (status) {
-            case STATUS.WORK:
-                return 'Work'
-            case STATUS.BREAK:
-                return 'Short Break'
-            case STATUS.LONG_BREAK:
-                return 'Long Break'
-        }
-    }
+
 
     useEffect(() => {
         if (timerStatus === TIMER_STATUS.RUNNING) {
             const interval = setInterval(() => {
                 setSecondsRemaining(secondsRemaining - 1)
-
                 if (secondsRemaining === 0) {
                     nextStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
                 }
             }, 1000)
             return () => clearInterval(interval)
         }
-
-
     }, [timerStatus, secondsRemaining])
 
     const handleStart = () => {

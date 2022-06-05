@@ -81,4 +81,15 @@ export const previousStatus = ({ status, setTimerStatus, setWorkDone, setStatus,
     }
 }
 
+export const getStatusText = (status: STATUS) => {
+    switch (status) {
+        case STATUS.WORK:
+            return 'Work'
+        case STATUS.BREAK:
+            return 'Short Break'
+        case STATUS.LONG_BREAK:
+            return 'Long Break'
+    }
+}
+
 export default getFormattedTime
