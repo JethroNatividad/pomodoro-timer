@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import getFormattedTime, { calculatePercentage, nextStatus } from '../lib/timer'
+import getFormattedTime, { calculatePercentage, nextStatus, previousStatus } from '../lib/timer'
 import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 import Pie from './TimerCircle'
 import ResetIcon from '../icons/reset.svg'
@@ -60,23 +60,7 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     }
 
     const handlePrevious = () => {
-        if (status === STATUS.WORK) {
-            setTimerStatus(TIMER_STATUS.PAUSED)
-            setStatus(STATUS.BREAK)
-            return setSecondsRemaining(appSettings.timers.breakTime * 60)
-        }
-
-        if (status === STATUS.BREAK) {
-            setTimerStatus(TIMER_STATUS.PAUSED)
-            setStatus(STATUS.WORK)
-            return setSecondsRemaining(appSettings.timers.workTime * 60)
-        }
-
-        if (status === STATUS.LONG_BREAK) {
-            setTimerStatus(TIMER_STATUS.PAUSED)
-            setStatus(STATUS.WORK)
-            return setSecondsRemaining(appSettings.timers.workTime * 60)
-        }
+        previousStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
     }
 
     return (
