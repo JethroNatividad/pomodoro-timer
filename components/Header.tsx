@@ -20,7 +20,7 @@ const Header = ({ workDone }: Props) => {
                 <h1 className='text-2xl lg:text-3xl font-semibold text-white drop-shadow-sm'>Pomodoro</h1>
             </div>
 
-            <div>
+            <div className='flex justify-center items-center'>
                 <Image src={SettingsIcon} objectFit="contain" className="invert" height={40} width={40} />
             </div>
         </div>
