@@ -4,16 +4,18 @@ import { useState } from 'react'
 import Header from '../components/Header'
 import PomodoroTimer from '../components/PomodoroTimer'
 import Settings from '../components/Settings'
+import useLocalStorage from '../hooks/useLocalStorage'
 import { AppSettings } from '../types'
 
 const Home: NextPage = () => {
-  const [appSettings, setAppSettings] = useState<AppSettings>({
+  const [appSettings, setAppSettings] = useLocalStorage('appSettings', {
     timers: {
       workTime: 25,
       breakTime: 5,
       longBreakTime: 15
     }
   })
+
   const [workDone, setWorkDone] = useState<number>(0)
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false)
 

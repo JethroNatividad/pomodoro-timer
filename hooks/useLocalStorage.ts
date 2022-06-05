@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react"
 
-type Props = {
-    key: string
-    value: any
-}
 
-const useLocalStorage = ({ key, value }: Props) => {
+const useLocalStorage = (key: string, value: any) => {
     const [state, setState] = useState(value)
-    const localStorageValue = localStorage.getItem(key)
 
     useEffect(() => {
+        const localStorageValue = localStorage.getItem(key)
         if (localStorageValue) {
             setState(JSON.parse(localStorageValue))
         } else {
