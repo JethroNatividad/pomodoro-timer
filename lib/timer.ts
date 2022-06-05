@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-import { AppSettings, STATUS, TIMER_STATUS } from "../types";
+import { NextStatusProps, PreviousStatusProps, STATUS, TIMER_STATUS } from "../types";
 
 const getFormattedTime = (timestamp: number) => {
     const hours = Math.floor(timestamp / 60 / 60)
@@ -12,15 +11,6 @@ export const calculatePercentage = (current: number, total: number) => {
     return Math.floor((current / total) * 100)
 }
 
-type NextStatusProps = {
-    status: STATUS
-    setWorkDone: Dispatch<SetStateAction<number>>
-    setStatus: Dispatch<SetStateAction<STATUS>>
-    setSecondsRemaining: Dispatch<SetStateAction<number>>
-    setTimerStatus: Dispatch<SetStateAction<TIMER_STATUS>>
-    appSettings: AppSettings
-    workDone: number
-}
 
 export const nextStatus = ({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone }: NextStatusProps) => {
     if (status === STATUS.WORK && workDone % 4 === 3) {
@@ -50,7 +40,7 @@ export const nextStatus = ({ status, setTimerStatus, setWorkDone, setStatus, set
     }
 }
 
-export const previousStatus = ({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone }: NextStatusProps) => {
+export const previousStatus = ({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone }: PreviousStatusProps) => {
     // to avoid negative values
     if (workDone < 1) return
 
