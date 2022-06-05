@@ -27,7 +27,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className='bg-light-green w-full h-screen'>
-        <Header workDone={workDone} />
+        <Header workDone={workDone} setSettingsOpen={setSettingsOpen} />
         <PomodoroTimer appSettings={appSettings} setWorkDone={setWorkDone} workDone={workDone} />
         <Settings appSettings={appSettings} setAppSettings={setAppSettings} setSettingsOpen={setSettingsOpen} settingsOpen={settingsOpen} />
       </main>

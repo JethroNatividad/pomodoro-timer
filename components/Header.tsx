@@ -1,13 +1,18 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import TomatoIcon from '../icons/tomato.svg'
 import SettingsIcon from '../icons/settings.svg'
 
 type Props = {
     workDone: number
+    setSettingsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const Header = ({ workDone }: Props) => {
+const Header = ({ workDone, setSettingsOpen }: Props) => {
+    const handleSettingsOpen = () => {
+        setSettingsOpen(true)
+    }
+
     return (
         <div className='shadow-lg h-16 flex items-center justify-between px-2'>
             <div className='flex items-center'>
@@ -20,7 +25,7 @@ const Header = ({ workDone }: Props) => {
                 <h1 className='text-2xl lg:text-3xl font-semibold text-white drop-shadow-sm'>Pomodoro</h1>
             </div>
 
-            <div className='flex justify-center items-center'>
+            <div onClick={handleSettingsOpen} className='flex justify-center items-center cursor-pointer'>
                 <Image src={SettingsIcon} objectFit="contain" className="invert" height={40} width={40} />
             </div>
         </div>
