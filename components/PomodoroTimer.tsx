@@ -58,13 +58,13 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
         <div className='flex flex-col mt-10 items-center justify-center space-y-5'>
             <h1 className='text-xl font-semibold text-white'>{getStatusText(status)}</h1>
             <div className='flex items-center max-w-lg w-full justify-between'>
-                <Image onClick={handlePrevious} src={PreviousIcon} objectFit="contain" className={`${timerStatus === TIMER_STATUS.PAUSED ? 'opacity-100' : 'opacity-0'} transition-all ease-in-out duration-200 invert cursor-pointer invisible xs:visible `} height={50} width={50} />
+                <Image onClick={handlePrevious} src={PreviousIcon} objectFit="contain" className={`${timerStatus === TIMER_STATUS.PAUSED && workDone > 0 ? 'opacity-100 cursor-pointer' : timerStatus === TIMER_STATUS.PAUSED && workDone < 1 ? 'opacity-20' : 'opacity-0'} transition-all ease-in-out duration-200 invert invisible xs:visible `} height={50} width={50} />
                 <Pie percentage={calculatePercentage(secondsRemaining, appSettings.timers[status] * 60)} handleStart={handleStart} handlePause={handlePause} timerStatus={timerStatus} />
                 <Image onClick={handleNext} src={NextIcon} objectFit="contain" className={`${timerStatus === TIMER_STATUS.PAUSED ? 'opacity-100' : 'opacity-0'} transition-all ease-in-out duration-200 invert cursor-pointer invisible xs:visible `} height={50} width={50} />
 
             </div>
             <div className='flex items-center justify-between'>
-                <Image onClick={handlePrevious} src={PreviousIcon} objectFit="contain" className={`${timerStatus === TIMER_STATUS.PAUSED ? 'opacity-100' : 'opacity-0'} transition-all ease-in-out duration-200 invert cursor-pointer visible xs:invisible`} height={30} width={30} />
+                <Image onClick={handlePrevious} src={PreviousIcon} objectFit="contain" className={`${timerStatus === TIMER_STATUS.PAUSED && workDone > 0 ? 'opacity-100 cursor-pointer' : timerStatus === TIMER_STATUS.PAUSED && workDone < 1 ? 'opacity-20' : 'opacity-0'} transition-all ease-in-out duration-200 invert visible xs:invisible`} height={30} width={30} />
                 <h1 className='text-3xl font-semibold text-white mx-5'>{getFormattedTime(secondsRemaining)}</h1>
                 <Image onClick={handleNext} src={NextIcon} objectFit="contain" className={`${timerStatus === TIMER_STATUS.PAUSED ? 'opacity-100' : 'opacity-0'} transition-all ease-in-out duration-200 invert cursor-pointer visible xs:invisible `} height={30} width={30} />
 
