@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 
-
-const useLocalStorage = (key: string, value: any) => {
-    const [state, setState] = useState(value)
+const useLocalStorage = <T>(key: string, value: T): [T, (to: T) => void, () => void] => {
+    const [state, setState] = useState<T>(value)
 
     useEffect(() => {
         const localStorageValue = localStorage.getItem(key)
@@ -13,13 +12,12 @@ const useLocalStorage = (key: string, value: any) => {
         }
     }, [])
 
-    const update = (to: any) => {
+    const update = (to: T) => {
         setState(to)
         localStorage.setItem(key, JSON.stringify(to))
     }
 
     const remove = () => {
-        setState(null)
         localStorage.removeItem(key)
     }
 
