@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 type Props = {
     appSettings: AppSettings
-    setWorkDone: Dispatch<SetStateAction<number>>
+    setWorkDone: (args: number) => void
     workDone: number
 }
 

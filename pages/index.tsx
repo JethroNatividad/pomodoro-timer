@@ -16,7 +16,7 @@ const Home: NextPage = () => {
     }
   })
 
-  const [workDone, setWorkDone] = useState<number>(0)
+  const [workDone, setWorkDone] = useLocalStorage<number>('workDone', 0)
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false)
 
 

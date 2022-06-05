@@ -21,7 +21,7 @@ export enum TIMER_STATUS {
 
 export type NextStatusProps = {
     status: STATUS
-    setWorkDone: Dispatch<SetStateAction<number>>
+    setWorkDone: (args: number) => void
     setStatus: Dispatch<SetStateAction<STATUS>>
     setSecondsRemaining: Dispatch<SetStateAction<number>>
     setTimerStatus: Dispatch<SetStateAction<TIMER_STATUS>>
