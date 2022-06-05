@@ -28,7 +28,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className='bg-light-green w-full h-screen select-none'>
+      <main className='bg-light-green w-full h-screen select-none [-webkit-tap-highlight-color:transparent]'>
         <Header workDone={workDone} setSettingsOpen={setSettingsOpen} />
         <PomodoroTimer appSettings={appSettings} setWorkDone={setWorkDone} workDone={workDone} />
         <Settings appSettings={appSettings} setAppSettings={setAppSettings} setSettingsOpen={setSettingsOpen} settingsOpen={settingsOpen} />
