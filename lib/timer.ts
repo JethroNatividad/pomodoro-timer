@@ -50,4 +50,32 @@ export const nextStatus = ({ status, setTimerStatus, setWorkDone, setStatus, set
     }
 }
 
+export const previousStatus = ({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone }: NextStatusProps) => {
+    if (status === STATUS.WORK && workDone === 4) {
+        setTimerStatus(TIMER_STATUS.PAUSED)
+        setStatus(STATUS.LONG_BREAK)
+        return setSecondsRemaining(appSettings.timers.longBreakTime * 60)
+    }
+
+    if (status === STATUS.WORK) {
+        setTimerStatus(TIMER_STATUS.PAUSED)
+        setStatus(STATUS.BREAK)
+        return setSecondsRemaining(appSettings.timers.breakTime * 60)
+    }
+
+    if (status === STATUS.BREAK) {
+        setTimerStatus(TIMER_STATUS.PAUSED)
+        setWorkDone(workDone - 1)
+        setStatus(STATUS.WORK)
+        return setSecondsRemaining(appSettings.timers.workTime * 60)
+    }
+
+    if (status === STATUS.LONG_BREAK) {
+        setTimerStatus(TIMER_STATUS.PAUSED)
+        setWorkDone(workDone - 1)
+        setStatus(STATUS.WORK)
+        return setSecondsRemaining(appSettings.timers.workTime * 60)
+    }
+}
+
 export default getFormattedTime
