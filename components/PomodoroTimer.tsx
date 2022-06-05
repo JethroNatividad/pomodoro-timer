@@ -48,6 +48,7 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
             const interval = setInterval(() => {
                 setSecondsRemaining(secondsRemaining - 1)
                 if (secondsRemaining === 0) {
+                    playSound()
                     nextStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
                 }
             }, 1000)
@@ -60,7 +61,6 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     return (
 
         <div className='flex flex-col mt-10 items-center justify-center space-y-5'>
-            <p onClick={playSound}>Ding</p>
             <h1 className='text-xl font-semibold text-white'>{getStatusText(status)}</h1>
             <div className='flex items-center max-w-lg w-full justify-between'>
                 <Image onClick={handlePrevious} src={PreviousIcon} objectFit="contain" className={`${timerStatus === TIMER_STATUS.PAUSED && workDone > 0 ? 'opacity-100 cursor-pointer' : timerStatus === TIMER_STATUS.PAUSED && workDone < 1 ? 'opacity-20' : 'opacity-0'} transition-all ease-in-out duration-200 invert invisible xs:visible `} height={50} width={50} />
