@@ -8,7 +8,7 @@ import useLocalStorage from '../hooks/useLocalStorage'
 import { AppSettings } from '../types'
 
 const Home: NextPage = () => {
-  const [appSettings, setAppSettings] = useLocalStorage('appSettings', {
+  const [appSettings, setAppSettings] = useLocalStorage<AppSettings>('appSettings', {
     timers: {
       workTime: 25,
       breakTime: 5,
