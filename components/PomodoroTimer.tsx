@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import getFormattedTime, { calculatePercentage, getStatusText, nextStatus, previousStatus } from '../lib/timer'
+import getFormattedTime, { calculatePercentage, getStatusText, nextStatus, playSound, previousStatus } from '../lib/timer'
 import { AppSettings, STATUS, TIMER_STATUS } from '../types'
 import Pie from './TimerCircle'
 import ResetIcon from '../icons/reset.svg'
@@ -60,6 +60,7 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     return (
 
         <div className='flex flex-col mt-10 items-center justify-center space-y-5'>
+            <p onClick={playSound}>Ding</p>
             <h1 className='text-xl font-semibold text-white'>{getStatusText(status)}</h1>
             <div className='flex items-center max-w-lg w-full justify-between'>
                 <Image onClick={handlePrevious} src={PreviousIcon} objectFit="contain" className={`${timerStatus === TIMER_STATUS.PAUSED && workDone > 0 ? 'opacity-100 cursor-pointer' : timerStatus === TIMER_STATUS.PAUSED && workDone < 1 ? 'opacity-20' : 'opacity-0'} transition-all ease-in-out duration-200 invert invisible xs:visible `} height={50} width={50} />

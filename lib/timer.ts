@@ -82,4 +82,9 @@ export const getStatusText = (status: STATUS) => {
     }
 }
 
+export const playSound = () => {
+    let audio = new Audio('/sounds/ding1.mp3')
+    audio.play()
+}
+
 export default getFormattedTime
