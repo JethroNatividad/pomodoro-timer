@@ -2,21 +2,24 @@ import Image from 'next/image'
 import React from 'react'
 import SubtractIcon from '../icons/subtract.svg'
 import AddIcon from '../icons/add.svg'
+import { STATUS } from '../types'
+
 type Props = {
-    setTime: (time: number) => void
+    setTime: (time: number, timeType: STATUS) => void
     time: number
     title: string
+    timeType: STATUS
 }
 
-const TimeSetter = ({ title, time, setTime }: Props) => {
+const TimeSetter = ({ title, time, setTime, timeType }: Props) => {
     const handleAdd = () => {
-        if (time < 60) return
-        setTime(time + 1)
+        if (time > 59) return
+        setTime(time + 1, timeType)
     }
 
     const handleSubtract = () => {
         if (time < 2) return
-        setTime(time - 1)
+        setTime(time - 1, timeType)
     }
 
     return (
