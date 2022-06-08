@@ -26,7 +26,7 @@ const Settings = ({ settingsOpen, setSettingsOpen, appSettings, setAppSettings }
     }
 
     return (
-        <div className={`${settingsOpen ? 'flex' : 'hidden'} flex-col transition-all delay-500 absolute right-0 top-0 max-w-xl w-full h-full bg-light-green shadow-lg`}>
+        <div className={`${settingsOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col transition-all ease-in-out duration-300 fixed right-0 top-0 max-w-xl w-full h-full bg-light-green shadow-lg`}>
             <div className='flex justify-end w-full h-16 px-4'>
                 <Image onClick={handleClose} src={CloseIcon} objectFit="contain" className="invert cursor-pointer" height={30} width={30} />
             </div>
