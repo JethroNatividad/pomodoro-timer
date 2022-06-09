@@ -55,7 +55,7 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
         if (timerStatus === TIMER_STATUS.RUNNING) {
             const interval = workerTimers.setInterval(() => {
                 setSecondsRemaining(secondsRemaining - 1)
-                if (secondsRemaining === 0) {
+                if (secondsRemaining < 1) {
                     playSound()
                     // show notification
                     if (Notification.permission === 'granted') {
