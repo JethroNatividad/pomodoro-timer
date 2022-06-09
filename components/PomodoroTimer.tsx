@@ -45,11 +45,26 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
     }, [appSettings.timers])
 
     useEffect(() => {
+        // request notification permission
+        if (Notification.permission === 'default') {
+            Notification.requestPermission()
+        }
+    }, [])
+
+    useEffect(() => {
         if (timerStatus === TIMER_STATUS.RUNNING) {
             const interval = workerTimers.setInterval(() => {
                 setSecondsRemaining(secondsRemaining - 1)
                 if (secondsRemaining === 0) {
                     playSound()
+                    // show notification
+                    if (Notification.permission === 'granted') {
+                        new Notification('Pomodoro', {
+                            body: `${getStatusText(status)} is done!`,
+                            icon: '/favicon.ico'
+                        })
+                    }
+
                     nextStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
                 }
             }, 1000)
