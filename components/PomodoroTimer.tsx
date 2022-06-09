@@ -59,10 +59,16 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
                     playSound()
                     // show notification
                     if (Notification.permission === 'granted') {
-                        new Notification('Pomodoro', {
+                        const n = new Notification('Pomodoro', {
                             body: `${getStatusText(status)} is done!`,
                             icon: '/favicon.ico'
                         })
+                        document.addEventListener('visibilitychange', function () {
+                            if (document.visibilityState === 'visible') {
+                                // The tab has become visible so clear the now-stale Notification.
+                                n.close();
+                            }
+                        });
                     }
 
                     nextStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
