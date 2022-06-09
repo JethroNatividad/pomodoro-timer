@@ -6,6 +6,7 @@ import ResetIcon from '../icons/reset.svg'
 import PreviousIcon from '../icons/previous.svg'
 import NextIcon from '../icons/next.svg'
 import Image from 'next/image'
+import * as workerTimers from 'worker-timers'
 
 type Props = {
     appSettings: AppSettings
@@ -45,14 +46,14 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
 
     useEffect(() => {
         if (timerStatus === TIMER_STATUS.RUNNING) {
-            const interval = setInterval(() => {
+            const interval = workerTimers.setInterval(() => {
                 setSecondsRemaining(secondsRemaining - 1)
                 if (secondsRemaining === 0) {
                     playSound()
                     nextStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
                 }
             }, 1000)
-            return () => clearInterval(interval)
+            return () => workerTimers.clearInterval(interval)
         }
     }, [timerStatus, secondsRemaining])
 
