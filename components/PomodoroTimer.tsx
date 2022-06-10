@@ -57,6 +57,8 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
                 setSecondsRemaining(secondsRemaining - 1)
                 if (secondsRemaining < 1) {
                     playSound()
+                    handlePause()
+                    nextStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
                     // show notification
                     if (Notification.permission === 'granted') {
                         const n = new Notification('Pomodoro', {
@@ -74,7 +76,6 @@ const PomodoroTimer = ({ appSettings, setWorkDone, workDone }: Props) => {
                         });
                     }
 
-                    nextStatus({ status, setTimerStatus, setWorkDone, setStatus, setSecondsRemaining, appSettings, workDone })
                 }
             }, 1000)
             return () => workerTimers.clearInterval(interval)
