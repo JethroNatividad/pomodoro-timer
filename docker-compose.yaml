@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    image: docker-pomodoro-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./components:/app/components
+      - ./hooks:/app/hooks
+      - ./icons:/app/icons
+      - ./lib:/app/lib
+      - ./pages:/app/pages
+      - ./styles:/app/styles
+      - ./public:/app/public
+      - ./types:/app/types
+      - ./tailwind.config.js:/app/tailwind.config.js
+      - ./postcss.config.js:/app/postcss.config.js
